@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.1.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/rizac/eGSIM:
+      branch: master
+      repo: https://github.com/rizac/eGSIM.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/rizac/eGSIM git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-cobalt-woodlouse.sh
+        container: qc.acc_lumpy-viridian-dolphin
+  QC.Doc:
+    repos:
+      github.com/rizac/eGSIM find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-sepia-yak.sh
+        container: qc.doc_pasty-periwinkle-wolf
+      github.com/rizac/eGSIM git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-apricot-mastiff.sh
+        container: qc.doc_goopy-gold-duck
+      github.com/rizac/eGSIM markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-cerulean-camel.sh
+        container: qc.doc_wheezy-champagne-buzzard
+  QC.Lic:
+    repos:
+      github.com/rizac/eGSIM licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-ivory-eagle.sh
+        container: qc.lic_gamy-yellow-slug
+  QC.Sec:
+    repos:
+      github.com/rizac/eGSIM bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-sapphire-retriever.sh
+        container: qc.sec_breezy-mustard-deer
+  QC.Sty:
+    repos:
+      github.com/rizac/eGSIM flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-wheat-zorse.sh
+        container: qc.sty_lousy-champagne-zebra
+      github.com/rizac/eGSIM jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-lavender-raccoon.sh
+        container: qc.sty_queasy-rose-neanderthal
+  QC.Uni:
+    repos:
+      github.com/rizac/eGSIM pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-pumpkin-tetra.sh
+        container: qc.uni_woolly-green-catfish
+  QC.Ver:
+    repos:
+      github.com/rizac/eGSIM get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-cyan-beagle.sh
+        container: qc.ver_gummy-brown-dachsbracke
+timeout: 5400
